@@ -12,6 +12,9 @@ Power_supply_code(specan, 4, 12, 2, 1)
 %turn on channel 3 to drive the coil forwards
 Power_supply_code(specan, 3, 12, 2, 1)
 
+%initialize magnetometer reading matrix
+magnetometer_data_averaged = zeros(25,3);
+
 %move the motor, take readings, assuming -ve takes motor away from coil, +ve takes motor towards coil (change later as needed)
 for reading = 1:25
     disp(reading))
