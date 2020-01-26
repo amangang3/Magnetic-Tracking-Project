@@ -16,7 +16,7 @@ Power_supply_code(specan, 3, 12, 4, 1)
 magnetometer_data_averaged = zeros(25,3);
 
 %move the motor, take readings, assuming -ve takes motor towards coil
-for reading = 1:25
+for reading = 1:22
     disp(reading);
     %if it's the 1st coil, just take the reading
     if reading == 1
@@ -24,16 +24,16 @@ for reading = 1:25
         magnetometer_data_averaged(reading,:) = mean(incoming_mag_data,1);
     end
 
-    %for 1<reading<=13 move the thing 20mm away from coil and take reading
-    if (reading>1) && (reading<=13)
+    %for 1<reading<=11 move the thing 20mm away from coil and take reading
+    if (reading>1) && (reading<=11)
         program_motor(20)
         incoming_mag_data = collect_5_second_reading(sparkfun_MPU);
         magnetometer_data_averaged(reading,:) = mean(incoming_mag_data,1);
     end
 
-    %for reading > 13 move the thing 20mm toward the coil and take reading 
-    if reading > 13
-        program_motor(20)
+    %for reading > 11 move the thing 20mm toward the coil and take reading 
+    if reading > 11
+        program_motor(-20)
         incoming_mag_data = collect_5_second_reading(sparkfun_MPU);
         magnetometer_data_averaged(reading,:) = mean(incoming_mag_data,1);
     end
