@@ -30,4 +30,3 @@ plot(distance, magnetometer_readings);
 normalized = norm(magnetometer_readings);
 figure;
 plot(distance, normMag);
-
