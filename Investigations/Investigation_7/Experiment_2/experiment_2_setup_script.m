@@ -14,7 +14,7 @@ Power_supply_code(specan, 4, 12, 2, 1)
 forward_readings_averaged = zeros(21,3);
 backward_readings_averaged = zeros(21,3);
 
-reading_time = 1; 
+reading_time = 10; %this should be in seconds 
 
 %move the motor, take readings, assuming -ve takes motor towards coil
 for reading = 1:21
