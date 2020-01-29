@@ -9,11 +9,9 @@ sparkfun_MPU = initialize_MPU();
 Power_supply_code(specan, 2, 10, 4, 1)
 %turn on channel 4 to power motor driver
 Power_supply_code(specan, 4, 12, 2, 1)
-%turn on channel 3 to drive the coil forwards
-% Power_supply_code(specan, 3, 12, 4, 1)
 
-%turn on channel 1 to drive the coil backwards
-% Power_supply_code(specan, 1, 12, 4, 1) 
+%set reading time
+reading_time = 5
 
 %initialize magnetometer reading matrix
 forward_readings_averaged = zeros(21,3);
@@ -28,7 +26,7 @@ for reading = 1:21
         %turn forward coil on
         Power_supply_code(specan, 3, 12, 4, 1)
         %collect readings
-        incoming_mag_data = collect_5_second_reading(sparkfun_MPU);
+        incoming_mag_data = collect_x_second_reading(reading_time, sparkfun_MPU);
         forward_readings_averaged(reading,:) = mean(incoming_mag_data,1);
         %turn forward coil off
         Power_supply_code(specan, 3, 12, 4, 0)
@@ -37,7 +35,7 @@ for reading = 1:21
         %wait 5 seconds
         pause(5)
         %collect reading
-        incoming_mag_data = collect_5_second_reading(sparkfun_MPU);
+        incoming_mag_data = collect_x_second_reading(reading_time, sparkfun_MPU);
         backward_readings_averaged(reading,:) = mean(incoming_mag_data,1);
         %turn backward coil off
         Power_supply_code(specan, 1, 12, 4, 0)
@@ -50,7 +48,7 @@ for reading = 1:21
         %turn forward coil on
         Power_supply_code(specan, 3, 12, 4, 1)
         %collect readings
-        incoming_mag_data = collect_5_second_reading(sparkfun_MPU);
+        incoming_mag_data = collect_x_second_reading(reading_time, sparkfun_MPU);
         forward_readings_averaged(reading,:) = mean(incoming_mag_data,1);
         %turn forward coil off
         Power_supply_code(specan, 3, 12, 4, 0)
@@ -59,7 +57,7 @@ for reading = 1:21
         %wait 5 seconds
         pause(5)
         %collect reading
-        incoming_mag_data = collect_5_second_reading(sparkfun_MPU);
+        incoming_mag_data = collect_x_second_reading(reading_time, sparkfun_MPU);
         backward_readings_averaged(reading,:) = mean(incoming_mag_data,1);
         %turn backward coil off
         Power_supply_code(specan, 1, 12, 4, 0)
@@ -72,7 +70,7 @@ for reading = 1:21
         %turn forward coil on
         Power_supply_code(specan, 3, 12, 4, 1)
         %collect readings
-        incoming_mag_data = collect_5_second_reading(sparkfun_MPU);
+        incoming_mag_data = collect_x_second_reading(reading_time, sparkfun_MPU);
         forward_readings_averaged(reading,:) = mean(incoming_mag_data,1);
         %turn forward coil off
         Power_supply_code(specan, 3, 12, 4, 0)
@@ -81,7 +79,7 @@ for reading = 1:21
         %wait 5 seconds
         pause(5)
         %collect reading
-        incoming_mag_data = collect_5_second_reading(sparkfun_MPU);
+        incoming_mag_data = collect_x_second_reading(reading_time, sparkfun_MPU);
         backward_readings_averaged(reading,:) = mean(incoming_mag_data,1);
         %turn backward coil off
         Power_supply_code(specan, 1, 12, 4, 0)
