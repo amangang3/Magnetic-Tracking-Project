@@ -21,7 +21,7 @@ distance = [distance_1, distance_2];
 
 %subtract readings
 magnetometer_readings = forward_readings - backward_readings;
-
+magnetometer_readings = backward_subtraction(backward_readings, forward_readings);
 %Bookkeeping crap for plot
 distance_plot = distance;
 midpoint = ceil(length(distance)/2);

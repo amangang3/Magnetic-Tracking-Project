@@ -26,6 +26,9 @@ normMag = sqrt(sum(magnetometer_readings.^2,2));
 
 figure;
 plot(distance, magnetometer_readings);
+xlabel('Distance (cm)')
+ylabel('Magnetometer values (uT)')
+title('Investigation 6 - Coil swapped after an hour')
 
 normalized = norm(magnetometer_readings);
 figure;

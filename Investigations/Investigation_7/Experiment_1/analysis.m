@@ -26,6 +26,9 @@ normMag = sqrt(sum(magnetometer_readings.^2,2));
 
 figure;
 plot(distance, magnetometer_readings);
+xlabel('Distance (cm)')
+ylabel('Magnetometer values (uT)')
+title('Investigation 7 - 1s integration time')
 
 normalized = norm(magnetometer_readings);
 figure;
