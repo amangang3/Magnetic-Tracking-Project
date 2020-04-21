@@ -19,17 +19,28 @@ midpoint = ceil(length(distance)/2);
 distance_plot = [10:2:30 32:2:50];
 
 figure;
-plot(distance_plot,magnetometer_readings);
+plot(distance_plot,magnetometer_readings, 'LineWidth', 2);
 set(gca,'XTick',distance_plot,'XTickLabel',distance);
+set(findobj(gcf,'type','axes'),'FontName','Arial','FontSize',20)
 
 normMag = sqrt(sum(magnetometer_readings.^2,2));
 
 figure;
-plot(distance, magnetometer_readings);
+plot(distance, magnetometer_readings, 'LineWidth', 2);
 xlabel('Distance (cm)')
 ylabel('Magnetometer values (uT)')
-title('Investigation 7 - 1s integration time')
+title('1s integration time')
+set(findobj(gcf,'type','axes'),'FontName','Arial','FontSize',20)
 
 normalized = norm(magnetometer_readings);
 figure;
 plot(distance, normMag);
+
+
+%look at standard deviation 
+sample_1 = normMag(1:11,:);
+sample_2 = normMag(11:end,:);
+sample_2 = flip(sample_2);
+[h, p] = ttest2(sample_1,sample_2)
+means_subtraction = sample_1 - sample_2;
+mean_subtraction = mean(means_subtraction);

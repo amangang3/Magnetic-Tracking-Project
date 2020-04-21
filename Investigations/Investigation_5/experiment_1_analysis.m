@@ -28,8 +28,12 @@ midpoint = ceil(length(distance)/2);
 distance_plot = [10:2:30 32:2:50];
 
 figure;
-plot(distance_plot,magnetometer_readings);
+%plot(distance_plot,magnetometer_readings);
+plot(distance_plot, forward_readings(:,1));
 set(gca,'XTick',distance_plot,'XTickLabel',distance);
+xlabel('Distance (cm)')
+ylabel('Magnetometer values (uT)')
+legend('X direction', 'Y direction', 'Z direction');
 
 normMag = sqrt(sum(magnetometer_readings.^2,2));
 

@@ -1,5 +1,4 @@
-clear all;
-close all;
+
 
 load('distance.mat');
 load('mag_predicted_exp_2.mat');
