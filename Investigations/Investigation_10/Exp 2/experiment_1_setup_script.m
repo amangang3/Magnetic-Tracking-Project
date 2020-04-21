@@ -11,16 +11,15 @@ Power_supply_code(specan, 2, 10, 4, 1)
 Power_supply_code(specan, 4, 12, 2, 1)
 
 %initialize magnetometer reading matrix
-forward_readings_averaged = zeros(21,3);
-backward_readings_averaged = zeros(21,3);
+% forward_readings_averaged = zeros(21,3);
+% backward_readings_averaged = zeros(21,3);
 
 %create cells to save the complete data
 complete_forward_readings = {};
 
 %measurement parameters:
-%reading_time = 30; %this should be in seconds 
-reading_time = 5
-measurement_dists = [0:10:220]; %measurements points in mm
+reading_time = 5; %this should be in seconds 
+measurement_dists = [0:10:800]; %measurements points in mm
 switch_interval = 2; %seconds
 
 
@@ -43,7 +42,7 @@ for reading = 1:length(measurement_dists)
         %turn backward coil on 
         Power_supply_code(specan, 1, 10, 4, 1)
         
-        %wait 5 seconds
+        %wait X seconds
         pause(switch_interval)
         
         %collect reading

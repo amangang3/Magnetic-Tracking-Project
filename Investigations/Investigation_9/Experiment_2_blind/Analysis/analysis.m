@@ -19,21 +19,23 @@ sorted_predicted_distance = sort(predicted_distance,'ascend');
 %basic plot
 figure;
 hold on; 
-plot(distance, magnetometer_readings_real)
-plot(distance, mag_predicted)
+plot(distance, magnetometer_readings_real, 'LineWidth',2)
+plot(distance, mag_predicted, 'LineWidth', 2)
 xlabel('Distance (cm)');
 ylabel('Magnetometer readings (uT)');
-title('Predicted vs actual experiment 2');
+title('Experiment 1 - Predicted readings compared to actual reading');
 legend('Real readings','Predicted readings');
+set(findobj(gcf,'type','axes'),'FontName','Arial','FontSize',20)
 hold off;
 
 %plot errors
 errors = abs(distance - sorted_predicted_distance); %abs to turn negative values into positive ones 
 figure;
-plot(distance, errors);
+plot(distance, errors, 'LineWidth', 2);
 xlabel('Distance (cm)');
 ylabel('Error in distance (cm)');
-title('Error in distance prediction over real distance');
+title('Experiment 1 - Error in distance prediction over distance');
+set(findobj(gcf,'type','axes'),'FontName','Arial','FontSize',20)
 
 
 

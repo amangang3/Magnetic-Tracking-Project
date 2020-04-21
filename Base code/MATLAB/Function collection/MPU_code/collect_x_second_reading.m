@@ -11,5 +11,4 @@ function[raw_magnetometer_data] = collect_5_second_reading(reading_time,sparkfun
         raw_magnetometer_data(incoming_serial_length,(1:3)) = fscanf(sparkfun_MPU, formatSpec);
     end
     fclose(sparkfun_MPU)
-    %delay for 5 more seconds
 end

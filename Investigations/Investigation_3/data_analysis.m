@@ -1,4 +1,5 @@
 clear all;
+close all;
 load('magnetometer_data_coil.mat','-mat')
 
 %distance vector 
@@ -21,29 +22,36 @@ for i = 1:26
     end
 end
 
-%plot just to look at the differences
+%plot just to look at the differences - presentation
 figure; 
 subplot(2,1,1)
-plot(distance, forward_readings)
+plot(distance, forward_readings, 'LineWidth', 5)
 title("Forward readings")
 xlabel("Distance (cm)")
 ylabel("Magnetic flux (uT)")
 legend('X direction', 'Y direction', 'Z direction')
 ylim([-80 80]);
+xlim([10 50]);
 subplot(2,1,2)
-plot(distance, backward_readings)
+plot(distance, backward_readings, 'LineWidth',5)
 title("Backward readings")
 xlabel("Distance (cm")
 ylabel("Magnetic flux (uT)")
 legend('X direction', 'Y direction', 'Z direction')
 ylim([-80 80])
+xlim([10 50]);
+set(findobj(gcf,'type','axes'),'FontName','Arial','FontSize',23)
+
 
 %forward readings - backward readings 
-forward_minus_backward = forward_readings - backward_readings; 
+forward_minus_backward = backward_subtraction(backward_readings, forward_readings);
+%forward_minus_backward = forward_readings - backward_readings; 
 figure;
-plot(distance, forward_minus_backward);
+plot(distance, forward_minus_backward, 'LineWidth', 5);
 title("Forward readings - Backward readings")
 xlabel("Distance (cm)")
 ylabel("Magnetic flux (uT)")
 legend('X direction', 'Y direction', 'Z direction')
+xlim([10 50]);
+set(findobj(gcf,'type','axes'),'FontName','Arial','FontSize',23)
 

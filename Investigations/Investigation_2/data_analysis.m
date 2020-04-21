@@ -26,12 +26,11 @@ end
 
 %subtract ambient readings from active readings 
 for coil = 1:3 
-    background_corrected_readings(:,:,coil) = active_readings(:,:,coil) - ambient_readings(:,:,coil);
+    background_corrected_readings(:,:,coil) = (active_readings(:,:,coil) - ambient_readings(:,:,coil))/4;
 end
 
 %make all readings positive
 background_corrected_readings = abs(background_corrected_readings);
-
 %generate the ascension coil datasheet values 
 datasheet_distance = 4:28; %this is in inches
 datasheet_distance = datasheet_distance.* 2.54; %this converts it to cm 
@@ -71,23 +70,56 @@ xlim([10 70]);
 hold off; 
 
 %average the coil 3 values 
-average_coil_3 = mean(background_corrected_readings(:,:,3),2); 
+% average_coil_3 = mean(background_corrected_readings(:,:,3),2); 
+average_coil_3 = rssq(background_corrected_readings(:,:,3),2);
 figure;
 subplot(2,1,1)
-plot(datasheet_distance, datasheet_values_uT);
+plot(datasheet_distance, datasheet_values_uT, 'LineWidth', 5);
 title("Ascension Datasheet values, X coil");
 xlabel('Distance (cm)');
 ylabel('Magnetic flux (uT)');
-ylim([0 300]);
+ylim([0 600]);
 xlim([10 70]);
 subplot(2,1,2)
-plot(distance, average_coil_3); 
-title("Coil 3 magnitude values");
+plot(distance, average_coil_3, 'LineWidth', 5); 
+title("Coil 3 total magnitude values");
 xlabel('Distance (cm)');
 ylabel('Magnetic flux (uT)');
-ylim([0 300]); 
-
-
-
-
+ylim([0 600]); 
+set(findobj(gcf,'type','axes'),'FontName','Arial','FontSize',23)
+%plot over 3 coils for presentation
+figure; 
+hold on; 
+subplot(4,1,1)
+plot(distance, background_corrected_readings(:,:,1), 'LineWidth',5);
+title("A) Coil 1, Pin 7");
+legend('X direction', 'Y direction', 'Z direction');
+xlabel('Distance (cm)');
+ylabel('Magnetic flux (uT)');
+ylim([0 300]);
+xlim([10 35]);
+subplot(4,1,2)
+plot(distance, background_corrected_readings(:,:,2), 'LineWidth',5);
+legend('X direction', 'Y direction', 'Z direction');
+xlabel('Distance (cm)');
+ylabel('Magnetic flux (uT)');
+ylim([0 300]);
+xlim([10 35]);
+title("B) Coil 2, Pin 5");
+subplot(4,1,3)
+plot(distance, background_corrected_readings(:,:,3), 'LineWidth',5); 
+legend('X direction', 'Y direction', 'Z direction');
+xlabel('Distance (cm)');
+ylabel('Magnetic flux (uT)');
+ylim([0 300]);
+xlim([10 35]);
+title("C) Coil 3, Pin 4");
+subplot(4,1,4)
+plot(datasheet_distance, datasheet_values_uT, 'LineWidth',5);
+title("D) Ascension Datasheet values, X coil");
+xlabel('Distance (cm)');
+ylabel('Magnetic flux (uT)');
+ylim([0 300]);
+xlim([10 35]);
+set(findobj(gcf,'type','axes'),'FontName','Arial','FontSize',23)
 
